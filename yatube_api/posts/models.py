@@ -25,6 +25,7 @@ class Follow(models.Model):
     following = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        related_name='following',
         verbose_name='автор, на которого подписались'
     )
 
@@ -69,6 +70,7 @@ class Post(models.Model):
         default_related_name = 'posts'
         verbose_name = 'пост'
         verbose_name_plural = 'посты'
+        ordering = ['-pub_date']
 
     def __str__(self):
         return self.text[:LENGTH_STR]
@@ -97,6 +99,7 @@ class Comment(models.Model):
         default_related_name = 'comments'
         verbose_name = 'комментарий'
         verbose_name_plural = 'комментарии'
+        ordering = ['created']
 
     def __str__(self):
         return (f'Комментарий "{self.text[:LENGTH_STR]}" '

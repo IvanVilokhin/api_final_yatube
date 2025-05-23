@@ -49,7 +49,7 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Follow
-        fields = '__all__'
+        exclude = ('id',)
         validators = [
             UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
